@@ -31,7 +31,7 @@ if (empty($row["email"])) {
     } else {
         session_start();
         $_SESSION['isLoggedIn'] = true;
-        header("location:html/profile.html");
+        header("location:html/profileEdit.html");
     }
 }
 $result->free();

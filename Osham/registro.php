@@ -28,7 +28,7 @@
                 $result = $conn->query("insert into users values('$id','$email','$password')");
 
                 $conn->close();
-                header("location:html/profile.html");
+                header("location:html/profileEdit.html");
             } else {
                 echo '<a href=\'login.html\' ><h1>Usuario o password incorrectos, vuelva a intentarlo</h1> </a>';
 
