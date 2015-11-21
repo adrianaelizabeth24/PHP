@@ -16,7 +16,6 @@ Perfil
 			</head>
 		<body>
         <?php
-
             session_start();
             $emailUsuario = $_SESSION['email'];
 
@@ -33,8 +32,8 @@ Perfil
 			$birthday = $row["birthday"];
 			$gender = $row["gender"];
 			$profile = $row["profilePicture"];
-			$cover = $row["coverPicture"];
-			$biography = $row["biography"];
+			//$cover = $row["coverPicture"];
+			//$biography = $row["biography"];
 
 			$results->free();
 			$conn.close();
@@ -58,13 +57,9 @@ Perfil
 						<br/><br/>
 						<input type=\"text\" name=\"gender\" value=\"'$gender'\"  style=\"width:300px;height:40px;color:#646464;font-size:1.3em\" />
 						<br/><br/>
-						<img src=\"'$cover'\" width='100' height='100'>
+												<img src=\"'$profile'\" width='100' height='100'>
 						<br/><br/>
-						<img src=\"'$profile'\" width='100' height='100'>
-						<br/><br/>
-						<input type='text' name='biography' value='$biography'>
-						<br/><br/>
-						<input class=\"btn btn-default\" type=\"submit\" id=\"Editar\" name=\"Guardar\" value=\"Guardar\" />
+												<input class=\"btn btn-default\" type=\"submit\" id=\"Editar\" name=\"Guardar\" value=\"Guardar\" />
 						<br/></br/><br/>
 					</div>
 				</div>

@@ -21,7 +21,7 @@ $gender = $_POST["gender"];
 //$biography= htmlspecialchars( $_POST["bio"]);
 
 
-$nombreDirectorio = "img/";
+/*$nombreDirectorio = "img/";
 $coverPicture = $_FILES["co"]["name"];
 $nombreCompletoCover = $nombreDirectorio . $coverPicture;
 if (is_file($nombreCompletoCover)){
@@ -37,7 +37,7 @@ else if ($_FILES['co']['error'] == UPLOAD_ERR_FORM_SIZE){
 }
 // No se ha introducido ningun archivo
 else if ($_FILES['co']['name'] == "")
-    $coverPicture = '';
+    $coverPicture = '';  */
 
 $nombreDirectorio = "img/";
 $profilePicture = $_FILES["profilePicture"]["name"];
@@ -56,17 +56,13 @@ else if ($_FILES['profilePicture']['error'] == UPLOAD_ERR_FORM_SIZE){
 // No se ha introducido ningun archivo
 else if ($_FILES['profilePicture']['name'] == "")
     $profilePicture = '';
-
-
-
-
 // Create
 $conn = new mysqli('localhost', 'root','','osham');
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$instruccion = "insert into profile (email,userName,age,birthday,gender,profilePicture,coverPicture) values ('$email','$userName','$age','$birthday','$gender','$nombreCompletoProfile','$coverPicture')";
+$instruccion = "insert into profile (email,userName,age,birthday,gender,profilePicture) values ('$email','$userName','$age','$birthday','$gender','$nombreCompletoProfile')";
 if(!$conn->query($instruccion)){
     echo "Table insertion failed: (" . $conn->errno . ") " . $conn->error;
 }
@@ -75,8 +71,12 @@ $conn->close ();
 move_uploaded_file ($_FILES['profilePicture']['tmp_name'],
     $nombreDirectorio . $profilePicture);
 
-move_uploaded_file ($_FILES['co']['tmp_name'],
-    $nombreDirectorio . $coverPicture);
+session_start();
+$_SESSION['email'] = $email;
+header("location:html/profileView.php");
+
+/*move_uploaded_file ($_FILES['co']['tmp_name'],
+    $nombreDirectorio . $coverPicture);  */
 
 ?>
 </body>
