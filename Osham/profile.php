@@ -18,9 +18,26 @@ $userName = $_POST["userName"];
 $age = $_POST["age"];
 $birthday = $_POST["birthday"];
 $gender = $_POST["gender"];
-$biography= $_POST["biography"];
+//$biography= htmlspecialchars( $_POST["bio"]);
 
 
+$nombreDirectorio = "img/";
+$coverPicture = $_FILES["coverPicture"]["name"];
+$nombreCompletoCover = $nombreDirectorio . $coverPicture;
+if (is_file($nombreCompletoCover)){
+    $idUnico = time();
+    $coverPicture = $idUnico . "-" . $coverPicture;
+}
+// El archivo introducido supera el limite de tamaño permitido
+else if ($_FILES['coverPicture']['error'] == UPLOAD_ERR_FORM_SIZE){
+    $maxsize = $_REQUEST['MAX_FILE_SIZE'];
+    $errores["profilePicture"] =
+        "El tamaño del archivo supera el limite permitido ($maxsize bytes)!";
+    $error = true;
+}
+// No se ha introducido ningun archivo
+else if ($_FILES['coverPicture']['name'] == "")
+    $coverPicture = '';
 
 $nombreDirectorio = "img/";
 $profilePicture = $_FILES["profilePicture"]["name"];
@@ -41,24 +58,6 @@ else if ($_FILES['profilePicture']['name'] == "")
     $profilePicture = '';
 
 
-$coverPicture = $_FILES["coverPicture"]["name"];
-$nombreCompletoCover = $nombreDirectorio . $coverPicture;
-if (is_file($nombreCompletoCover)){
-    $idUnico = time();
-    $coverPicture = $idUnico . "-" . $coverPicture;
-}
-// El archivo introducido supera el limite de tamaño permitido
-else if ($_FILES['coverPicture']['error'] == UPLOAD_ERR_FORM_SIZE){
-    $maxsize = $_REQUEST['MAX_FILE_SIZE'];
-    $errores["coverPicture"] =
-        "El tamaño del archivo supera el limite permitido ($maxsize bytes)!";
-    $error = true;
-}
-// No se ha introducido ningun archivo
-else if ($_FILES['coverPicture']['name'] == "")
-    $coverPicture = '';
-
-
 
 
 // Create
@@ -67,9 +66,9 @@ $conn = new mysqli('localhost', 'root','','osham');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$instruccion = "insert into profile (email,userName,age,birthday,gender,profilePicture,coverPicture,biography) values ('$email','$userName','$age','$birthday','$gender','$nombreCompletoProfile','$coverPicture','$biography')";
+$instruccion = "insert into profile (email,userName,age,birthday,gender,profilePicture,coverPicture) values ('$email','$userName','$age','$birthday','$gender','$nombreCompletoProfile','$coverPicture')";
 if(!$conn->query($instruccion)){
-    echo "Table insertion failed: (" . $mysqli->errno . ") " . $mysqli->error;
+    echo "Table insertion failed: (" . $conn->errno . ") " . $conn->error;
 }
 $conn->close ();
 
