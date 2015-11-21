@@ -22,21 +22,21 @@ $gender = $_POST["gender"];
 
 
 $nombreDirectorio = "img/";
-$coverPicture = $_FILES["coverPicture"]["name"];
+$coverPicture = $_FILES["co"]["name"];
 $nombreCompletoCover = $nombreDirectorio . $coverPicture;
 if (is_file($nombreCompletoCover)){
     $idUnico = time();
     $coverPicture = $idUnico . "-" . $coverPicture;
 }
 // El archivo introducido supera el limite de tamaño permitido
-else if ($_FILES['coverPicture']['error'] == UPLOAD_ERR_FORM_SIZE){
+else if ($_FILES['co']['error'] == UPLOAD_ERR_FORM_SIZE){
     $maxsize = $_REQUEST['MAX_FILE_SIZE'];
     $errores["profilePicture"] =
         "El tamaño del archivo supera el limite permitido ($maxsize bytes)!";
     $error = true;
 }
 // No se ha introducido ningun archivo
-else if ($_FILES['coverPicture']['name'] == "")
+else if ($_FILES['co']['name'] == "")
     $coverPicture = '';
 
 $nombreDirectorio = "img/";
@@ -75,7 +75,7 @@ $conn->close ();
 move_uploaded_file ($_FILES['profilePicture']['tmp_name'],
     $nombreDirectorio . $profilePicture);
 
-move_uploaded_file ($_FILES['coverPicture']['tmp_name'],
+move_uploaded_file ($_FILES['co']['tmp_name'],
     $nombreDirectorio . $coverPicture);
 
 ?>
