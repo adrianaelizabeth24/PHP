@@ -1,3 +1,7 @@
+<html>
+<head>
+</head>
+<body>
 <?php
 /**
  * Created by PhpStorm.
@@ -9,15 +13,18 @@ function resetPassword($email,$password)
 {
     $conn = new mysqli('localhost', 'root', '', 'osham');
 
-// Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     if($conn->query("update users set password = '$password' where email = '$email'") === TRUE){
-       return 0;
+        print("New record created successfully");
     }
     else {
-        return 1;
+        print("error");
     }
     $conn->close();
 }
+
+?>
+</body>
+</html>

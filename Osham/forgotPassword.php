@@ -17,9 +17,7 @@ $email = $_POST["user"];
 
         $numero = crypt($email,'."#$%&/()');
         include("resetPassword.php");
-        $func = resetPassword($email,$numero);
-
-        if($func == 0) {
+        resetPassword($email,$numero);
 
                 require("PHPMailer-master/PHPMailer-master/PHPMailerAutoload.php");
                 $mail = new PHPMailer;
@@ -38,16 +36,13 @@ $email = $_POST["user"];
                 $mail->addAddress($email, 'Usuario');
                 $mail->Subject = 'Reset Password';
                 $mail->isHTML(true);
-                $mail->Body = "Hola, querido usuario, tu nuevo password de tu cuenta es '$numero'";
+                $mail->Body = "Hola, querido usuario, tu nuevo password de tu cuenta es: $numero";
                 if (!$mail->send()) {
                         echo "Mailer Error: " . $mail->ErrorInfo;
                 } else {
-                        header("location:html/mailSent.html");
+                        header("location:html/mailSentPass.html");
                 }
-        }
-        else{
-                echo "NO";
-        }
+
 ?>
 </body>
 </Html>
