@@ -23,21 +23,25 @@
 					  <div id="input">
 						  <form action="../profile.php" method="post">
 					  	<br/><br/>
-						<input type="text" class="form-control" name="user" placeholder="Usuario" style="width:300px;height:40px;color:#646464;font-size:1.3em" required/>
+						<input type="text" class="form-control" name="userName" placeholder="Usuario" style="width:300px;height:40px;color:#646464;font-size:1.3em" required/>
 						<br/><br/>
-						<input type="text" class="form-control" name="correo" placeholder="Correo" style="width:300px;height:40px;color:#646464;font-size:1.3em" required/>
+						<input type="text" class="form-control" name="email" placeholder="Correo" style="width:300px;height:40px;color:#646464;font-size:1.3em" required/>
 						<br/><br/>
-						<input type="number" class="form-control" name="edad" placeholder="Edad" style="width:300px;height:40px;color:#646464;font-size:1.3em" required/>
+						<input type="number" class="form-control" name="age" placeholder="Edad" style="width:300px;height:40px;color:#646464;font-size:1.3em" required/>
 						<br/><br/>
-						<input type="date" class="form-control" name="fechaNac" placeholder="Fecha Nacimiento" style="width:300px;height:40px;color:#646464;font-size:1.3em" required/>
+						<input type="date" class="form-control" name="birthday" placeholder="Fecha Nacimiento" style="width:300px;height:40px;color:#646464;font-size:1.3em" required/>
 						<br/><br/>
-						<input type="radio" name="genero" value="Hombre"/>Hombre  <input type="radio" name="genero" value="mujer"> Mujer
+						<input type="radio" name="gender" value="Hombre"/>Hombre  <input type="radio" name="gender" value="mujer"> Mujer
 						<br/><br/>
-						Imagen de perfil<input type="file" name="profile" accept="image/*" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
+						Imagen de perfil <input type="file" name="profilePicture">
+							  <input type="hidden" name="size" value="640000">
 
 						<br/><br/>
-						Imagen de portada<input type="file" name="cover" accept="image/*" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
-						<br/><br/>
+						Imagen de portada <input type="file" name="coverPicture">
+							  <input type="hidden" name="size" value="640000">
+							  <br/><br/>
+							  <textarea placeholder="biography" name="biography"></textarea>
+							  <br/><br/>
 						<input class="btn btn-default" type="submit" id="entrar" name="Guardar" value="Guardar" />
 						<br/></br/><br/>
 							  </form>

@@ -18,6 +18,10 @@ $userName = $_POST["userName"];
 $age = $_POST["age"];
 $birthday = $_POST["birthday"];
 $gender = $_POST["gender"];
+$biography= $_POST["biography"];
+
+
+
 $nombreDirectorio = "img/";
 $profilePicture = $_FILES["profilePicture"]["name"];
 $nombreCompletoProfile = $nombreDirectorio . $profilePicture;
@@ -63,7 +67,7 @@ $conn = new mysqli('localhost', 'root','','osham');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$instruccion = "insert into profile (email,userName,age,birthday,gender,profilePicture,coverPicture) values ('#email','$userName','$age','$birthday','$gender','$nombreCompletoProfile','$coverPicture')";
+$instruccion = "insert into profile (email,userName,age,birthday,gender,profilePicture,coverPicture,biography) values ('$email','$userName','$age','$birthday','$gender','$nombreCompletoProfile','$coverPicture','$biography')";
 if(!$conn->query($instruccion)){
     echo "Table insertion failed: (" . $mysqli->errno . ") " . $mysqli->error;
 }

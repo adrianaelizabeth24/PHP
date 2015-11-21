@@ -31,6 +31,7 @@ if (empty($row["email"])) {
     } else {
         session_start();
         $_SESSION['isLoggedIn'] = true;
+        $_SESSION['email'] = $email;
         header("location:html/profileEdit.html");
     }
 }
