@@ -18,28 +18,29 @@ $userName = $_POST["userName"];
 $age = $_POST["age"];
 $birthday = $_POST["birthday"];
 $gender = $_POST["gender"];
+$biography= $_POST["bio"];
 //$biography= htmlspecialchars( $_POST["bio"]);
 
 
-/*$nombreDirectorio = "img/";
-$coverPicture = $_FILES["co"]["name"];
+$nombreDirectorio = "img/";
+$coverPicture = $_FILES['coverPicture']['name'];
 $nombreCompletoCover = $nombreDirectorio . $coverPicture;
 if (is_file($nombreCompletoCover)){
     $idUnico = time();
     $coverPicture = $idUnico . "-" . $coverPicture;
 }
 // El archivo introducido supera el limite de tamaño permitido
-else if ($_FILES['co']['error'] == UPLOAD_ERR_FORM_SIZE){
+else if ($_FILES['coverPicture']['error'] == UPLOAD_ERR_FORM_SIZE){
     $maxsize = $_REQUEST['MAX_FILE_SIZE'];
-    $errores["profilePicture"] =
+    $errores["coverPicture"] =
         "El tamaño del archivo supera el limite permitido ($maxsize bytes)!";
     $error = true;
 }
 // No se ha introducido ningun archivo
-else if ($_FILES['co']['name'] == "")
-    $coverPicture = '';  */
+else if ($_FILES['coverPicture']['name'] == "")
+    $coverPicture = '';  
 
-$nombreDirectorio = "img/";
+//$nombreDirectorio = "img/";
 $profilePicture = $_FILES["profilePicture"]["name"];
 $nombreCompletoProfile = $nombreDirectorio . $profilePicture;
 if (is_file($nombreCompletoProfile)){
@@ -62,7 +63,7 @@ $conn = new mysqli('localhost', 'root','','osham');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$instruccion = "insert into profile (email,userName,age,birthday,gender,profilePicture) values ('$email','$userName','$age','$birthday','$gender','$nombreCompletoProfile')";
+$instruccion = "insert into profile (email,userName,age,birthday,gender,profilePicture,coverPicture,biography) values ('$email','$userName','$age','$birthday','$gender','$nombreCompletoProfile','$nombreCompletoCover','$biography')";
 if(!$conn->query($instruccion)){
     echo "Table insertion failed: (" . $conn->errno . ") " . $conn->error;
 }
@@ -70,6 +71,9 @@ $conn->close ();
 
 move_uploaded_file ($_FILES['profilePicture']['tmp_name'],
     $nombreDirectorio . $profilePicture);
+
+move_uploaded_file ($_FILES['profilePicture']['tmp_name'],
+    $nombreDirectorio . $coverPicture);
 
 session_start();
 $_SESSION['email'] = $email;
