@@ -45,8 +45,8 @@ Perfil
 				$birthday = "";
 				$gender = "";
 				$profile = "";
-				//$cover = "";
-				//$biography = "";
+				$cover = "";
+				$biography = "";
 			}
 			$results->free();
 			$conn->close();
@@ -59,6 +59,7 @@ Perfil
 					  		<li class=\"active\" style=\"width:100%\"><h3>Biografía</h3></li>
 					  </ul>
 					  <div id=\"input\">
+					  <form method='post'>
 					  	<br/><br/>
 						<input type=\"text\" class=\"form-control\" name=\"userName\" value=\"'$username'\" style=\"width:300px;height:40px;color:#646464;font-size:1.3em\" required/>
 						<br/><br/>
@@ -70,10 +71,13 @@ Perfil
 						<br/><br/>
 						<input type=\"text\" name=\"gender\" value=\"'$gender'\"  style=\"width:300px;height:40px;color:#646464;font-size:1.3em\" />
 						<br/><br/>
-												<img src=\"../$profile\" width='100' height='100'>
+						<img src=\"../$profile\" width='100' height='100'>
 						<br/><br/>
-												<input class=\"btn btn-default\" type=\"submit\" id=\"Editar\" name=\"Guardar\" value=\"Guardar\" />
+						<img src=\" ../$cover\" width='100' height='100'>
+						<br/><br/>
+						<input class=\"btn btn-default\" type=\"submit\" id=\"Editar\" name=\"Editar\" value=\"Guardar\" />
 						<br/></br/><br/>
+					</form>
 					</div>
 				</div>
 			</div>");
