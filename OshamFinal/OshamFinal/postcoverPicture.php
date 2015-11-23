@@ -7,18 +7,13 @@
 </head>
 <body>
 <?php
-/**
- * Created by PhpStorm.
- * User: Adriana Valenzuela, Mayra Ruiz & Roberto Ruiz
- * Date: 04/11/2015
- * Time: 11:04
- */
+
 session_start();
 $emailUsuario = $_SESSION['email'];
 
 $nombreDirectorio = "img/";
 $coverPicture = $_FILES['coverPicture']['name'];
-$nombreCompletoCover = $nombreDirectorio . $coverPicture;
+$nombreCompletoCover = $nombreDirectorio . basename($coverPicture);
 if (is_file($nombreCompletoCover)){
     $idUnico = time();
     $coverPicture = $idUnico . "-" . $coverPicture;
@@ -45,9 +40,8 @@ if(!$conn->query($instruccion)){
     echo "Table insertion failed: (" . $conn->errno . ") " . $conn->error;
 }
 $conn->close ();
-move_uploaded_file ($_FILES['profilePicture']['tmp_name'],
-    $nombreDirectorio . $coverPicture);
 
+move_uploaded_file($_FILES["coverPicture"]["tmp_name"], $nombreCompletoCover);
 header("location:html/profileView.php");
 
 /*move_uploaded_file ($_FILES['co']['tmp_name'],
