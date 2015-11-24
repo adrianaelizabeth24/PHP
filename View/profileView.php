@@ -9,7 +9,7 @@
     <meta name="authors" content="Adriana Valenzuela, Mayra Ruíz, Roberto Ruíz">
     <meta name="property" content="ITESM CAMPUS MONTERREY">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="log.css" />
+    <link rel="stylesheet" href="../Assets/css/log.css" />
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:600' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -74,11 +74,18 @@ else
 $results->free();
 $conn->close();
 
+if($profile = ""){
+    $profile = "default.png";
+}
+
+if($cover = ""){
+    $cover = "default.png";
+}
 
 echo("
 <div id=\"top-bar\">
 			<div id=\"top-left\">
-			<a href=\"index.html\"><img src=\"oshamfashion.png\" width=\"200\" height=\"50\"></a>
+			<a href=\"index.html\"><img src=\"../Assets/images/oshamfashion.png\" width=\"200\" height=\"50\"></a>
 			</div>
 			<div id=\"top-right\">
 				<ul>
@@ -102,7 +109,7 @@ echo("
 					  		<li class=\"active\" style=\"width:100%\"><h3>Biografía</h3></li>
 					  </ul>
 					  <div id=\"input\">
-					  <form action=\"profileEdith.php\" method=\"post\">
+					  <form action=\"profileEdit.php\" method=\"post\">
 					  	<br/><br/>
 					  	Username: <legend>$username</legend>
 						<br/><br/>

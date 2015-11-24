@@ -9,7 +9,7 @@
     <meta name="authors" content="Adriana Valenzuela, Mayra Ruíz, Roberto Ruíz">
     <meta name="property" content="ITESM CAMPUS MONTERREY">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/log.css" />
+    <link rel="stylesheet" href="../Assets/css/log.css" />
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:600' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -33,7 +33,7 @@
 <body>
 <div id="top-bar">
     <div id="top-left">
-        <img src="images/oshamfashion.png" width="120" height="50"/>
+        <img src="../Assets/images/oshamfashion.png" width="120" height="50"/>
     </div>
     <div id="top-right">
         <a href="login.html"><i class="fa fa-user" style="color:#ffffff ;font-size:24px"></i></a>
@@ -47,11 +47,14 @@
         </ul>
         <div id="input">
             <br/><br/>
-            <form action="../Model/login.php" method="post">
+            <form method="post" id="loginform">
                 <input type="text" class="form-control" name="email" placeholder="Correo" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
                 <br/><br/>
                 <input type="password" class="form-control" name="password" placeholder="Contraseña" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
-                <br/><br/>
+                <br/>
+                <div id="loginError" hidden>Usuario o contraseña incorrectos.</div>
+                <br/>
+
                 <input class="btn btn-default" type="submit" id="entrar" name="entrar" value="Acceder" />
                 <br><br>
                 <a href="forgotPassword.html" id="forgetPass">Olvidaste tu password?</a>
@@ -60,5 +63,31 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#loginform").submit(function(event){
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "../Controller/login.php",
+                data: $(this).serialize(),
+                success: function(data){
+                    $("#loginError").hide(500);
+                    console.log(data);
+                    if(data == "login"){
+                        window.location = "./profileSave.html";
+                    } else {
+                        $("#loginError").show(500);
+                    }
+                }
+            });
+
+        });
+    });
+
+</script>
 </body>
 </html>

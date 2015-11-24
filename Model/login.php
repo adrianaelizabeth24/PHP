@@ -1,11 +1,3 @@
-<!doctype html>
-<html>
-<head>
-    <title>
-        Error
-    </title>
-</head>
-<body>
 <?php
 /**
  * Created by PhpStorm.
@@ -13,30 +5,22 @@
  * Date: 04/11/2015
  * Time: 11:04
  */
-$email = $_POST["email"];
-$password = $_POST["password"];
-// Create
-$conn = new mysqli('localhost', 'root','','osham');
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-$result=$conn->query("select * from users where email = '$email' ");
-$row = $result->fetch_assoc();
-if (empty($row["email"])) {
-    echo '<a href=\'../View/login.html\' ><h1>Usuario o password incorrectos, vuelva a intenerarlo</h1> </a>';
-} else {
-    if ($row["password"] != $password) {
-        echo '<a href=\'../View/login.html\'><h1>Usuario o password incorrectos, vuelva a intenerarlo</h1></a>';
-    } else {
-        session_start();
-        $_SESSION['isLoggedIn'] = true;
-        header("location:../View/profileSave.html");
-    }
-}
-$result->free();
-$conn->close();
 
+function try_login($email, $password)
+{
+    $conn = new mysqli('localhost', 'root', '', 'osham');
+// Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $result = $conn->query("select * from users where email = '$email' ");
+    $row = $result->fetch_assoc();
+    if (!empty($row["email"]) && $row["password"] == $password) {
+        session_start();
+        return "login";
+        $_SESSION['isLoggedIn'] = true;
+    }
+    $result->free();
+    $conn->close();
+}
 ?>
-</body>
-</html>
