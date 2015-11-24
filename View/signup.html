@@ -8,12 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="authors" content="Adriana Valenzuela, Mayra Ruíz, Roberto Ruíz">
     <meta name="property" content="ITESM CAMPUS MONTERREY">
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="../Assets/css/log.css"
+    <link rel="stylesheet" href="../Assets/css/log.css" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <style>
+
         #top-bar{
             background-color:#550055;
             width:100%;
@@ -22,6 +24,14 @@
         #top-right{
             margin-left:90%;
             margin-top:-35px;
+        }
+        #signupError{
+            background-color:rgba(185, 0, 0, .8);
+            width: 89%;
+            text-align: center;
+            padding: 5px;
+            color: white;
+            border-radius: 3px;
         }
     </style>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -40,21 +50,49 @@
         <li><a href="login.html"><h3>Log In</h3></a></li>
         <li class="active"><a href="#"><h3>Sign Up</h3></a></li>
     </ul>
-    <form action="../Controller/mailConfirmacion.php" method="post">
+    <form id="signupform" method="post">
         <div id="input">
             <br/><br/>
-            <input type="email" name="user" placeholder="Correo" class="form-control" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
+            <input type="email" required name="user" placeholder="Correo" class="form-control" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
             <br/><br/>
-            <input type="password" name="password" placeholder="Contraseña" class="form-control" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
+            <input type="password" required name="password" placeholder="Contraseña" class="form-control" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
             <br/><br/>
-            <input type="password"  class="form-control" name="passwordConfirm" placeholder="Confirma tu Contraseña" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
-            <br/><br/>
+            <input type="password" class="form-control" name="passwordConfirm" placeholder="Confirma tu Contraseña" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
+            <br/>
+            <div id="signupError" hidden>Placeholder</div>
+            <br/>
             <input type="submit" id="entrar" class="btn btn-default" name="entrar" value="Sign Up" />
             <br/></br/><br/>
 
         </div>
     </form>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#signupform").submit(function(event){
+            $("#signupError").slideUp(500);
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "../Controller/signup.php",
+                data: $(this).serialize(),
+                success: function(data){
+                    if(data == "ok"){
+                        window.location = "./profileSave.html";
+                    } else {
+                        $("#signupError").html(data);
+                        $("#signupError").slideDown(500);
+                    }
+                }
+            });
+
+        });
+    });
+
+</script>
 
 </body>
 </html>

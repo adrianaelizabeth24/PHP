@@ -1,28 +1,32 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Adriana Valenzuela, Mayra Ruiz & Roberto Ruiz
- * Date: 04/11/2015
- * Time: 11:04
+ * User: robil_000
+ * Date: 23/11/2015
+ * Time: 23:07
  */
 
-function try_login($email, $password)
-{
+function check_signup($email, $password){
     $conn = new mysqli('localhost', 'root', '', 'osham');
-// Check connection
+    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     $result = $conn->query("select * from users where email = '$email' ");
     $row = $result->fetch_assoc();
-    $ret = "";
-    if (!empty($row["email"]) && $row["password"] == $password) {
+    if (empty($row["email"])) {
+        $qr = "Insert into users(email, password) values('$email', $password)";
+        $conn->query($qr);
         session_start();
-        $ret = "login";
         $_SESSION['isLoggedIn'] = true;
+
+        $ret = "ok";
+    } else {
+        $ret = "El email ya existe";
     }
     $result->free();
     $conn->close();
     return $ret;
 }
+
 ?>

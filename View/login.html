@@ -14,10 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <style>
-        body{
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-        }
+        
         #top-bar{
             background-color:#550055;
             width:100%;
@@ -26,6 +23,15 @@
         #top-right{
             margin-left:90%;
             margin-top:-35px;
+        }
+
+        #loginError{
+            background-color:rgba(185, 0, 0, .8);
+            width: 89%;
+            text-align: center;
+            padding: 5px;
+            color: white;
+            border-radius: 3px;
         }
     </style>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -70,17 +76,17 @@
     $(document).ready(function(){
         $("#loginform").submit(function(event){
             event.preventDefault();
+            $("#loginError").slideUp(500);
             $.ajax({
                 type: "POST",
                 url: "../Controller/login.php",
                 data: $(this).serialize(),
                 success: function(data){
-                    $("#loginError").hide(500);
                     console.log(data);
                     if(data == "login"){
                         window.location = "./profileSave.html";
                     } else {
-                        $("#loginError").show(500);
+                        $("#loginError").slideDown(500);
                     }
                 }
             });
