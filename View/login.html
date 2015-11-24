@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Login
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="authors" content="Adriana Valenzuela, Mayra Ruíz, Roberto Ruíz">
+    <meta name="property" content="ITESM CAMPUS MONTERREY">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/log.css" />
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:600' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style>
+        body{
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        #top-bar{
+            background-color:#550055;
+            width:100%;
+            height:50px;
+        }
+        #top-right{
+            margin-left:90%;
+            margin-top:-35px;
+        }
+    </style>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+<div id="top-bar">
+    <div id="top-left">
+        <img src="images/oshamfashion.png" width="120" height="50"/>
+    </div>
+    <div id="top-right">
+        <a href="login.html"><i class="fa fa-user" style="color:#ffffff ;font-size:24px"></i></a>
+    </div>
+</div>
+<div id="dimension">
+    <div id="principal">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#"><h3>Log In</h3></a></li>
+            <li><a href="signup.html"><h3>Sign Up</h3></a></li>
+        </ul>
+        <div id="input">
+            <br/><br/>
+            <form action="../Model/login.php" method="post">
+                <input type="text" class="form-control" name="email" placeholder="Correo" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
+                <br/><br/>
+                <input type="password" class="form-control" name="password" placeholder="Contraseña" style="width:300px;height:40px;color:#646464;font-size:1.3em"/>
+                <br/><br/>
+                <input class="btn btn-default" type="submit" id="entrar" name="entrar" value="Acceder" />
+                <br><br>
+                <a href="forgotPassword.html" id="forgetPass">Olvidaste tu password?</a>
+            </form>
+            <br/></br/><br/>
+        </div>
+    </div>
+</div>
+</body>
+</html>
